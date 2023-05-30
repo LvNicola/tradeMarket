@@ -21,6 +21,7 @@ $name = $user['name'];
 $objects = TodoRepository::listAll();
 $userObjects = TodoRepository::listUserObjects($id_user);
 $tokens=TodoRepository::tokens($id_user);
+$categories=TodoRepository::listAllCategories();
 
 
 if (isset($_GET['action'])){
@@ -50,6 +51,16 @@ if (isset($_GET['action'])){
 
         TodoRepository::buyOggetto($id_object, $id_user, $id_seller);
         echo $template->render('transaction', ['name'=>$name]);
+
+        exit(0);
+    }
+    if (($_GET['action']) == 'add'){
+        $nome_oggetto=$_POST['nome'];
+        $id_category=$_POST['category'];
+        $descrizione=$_POST['descrizione'];
+
+        TodoRepository::addOggetto($id_user, $nome_oggetto, $id_category, $descrizione);
+
 
         exit(0);
     }
@@ -101,4 +112,5 @@ echo $template->render('crud', [
     'objects' => $objects,
     'id' => $id,
     'name' => $name,
+    'categories' =>$categories,
 ]);

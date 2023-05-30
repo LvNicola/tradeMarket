@@ -126,6 +126,30 @@
         </button></a>
     </section>
 </header>
+<form class="" method="POST" action="index.php">
+    <div>
+        <div>
+            <div>Nome oggetto</div>
+            <div><input type="text" id="nome" name="nome"></div>
+        </div>
+        <div>
+            <div>Categoria</div>
+            <select id="category" name="category">
+                <?php foreach ($categories as $c): ?>
+                <option value="<?=$c['id']?>"><?=$c['descrizione']?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+        <div>
+            <div>Descrizione</div>
+            <div><input type="text" id="descrizione" name="descrizione"></div>
+        </div>
+        <div>
+            <button type="submit" name="action" value="add">AGGIUNGI</button>
+        </div>
+    </div>
+</form>
+
 
 <div style="padding: 3vw"></div>
 <h1 class="h1" >Mercato attuale</h1>

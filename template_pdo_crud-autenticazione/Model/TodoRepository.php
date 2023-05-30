@@ -12,6 +12,13 @@ class TodoRepository{
         $stmt = $pdo->query($sql);
         return $stmt->fetchAll();
     }
+    public static function listAllCategories(): array{
+        $pdo = Connection::getInstance();
+        $sql = 'SELECT descrizione, id FROM categoria';
+        $stmt = $pdo->query($sql);
+        return $stmt->fetchAll();
+    }
+
     public static function listUserObjects(int $id_user)
     {
         $pdo = Connection::getInstance();
@@ -142,7 +149,19 @@ class TodoRepository{
         return true;
     }
 
-
+    public static function addOggetto(int $id_user, string $nome_oggetto, int $id_category, string $descrizione)
+    {
+        $pdo = Connection::getInstance();
+        $sql = 'INSERT INTO oggetto(nome, descrizione, id_categoria, data_offerta, id_offerente)
+            VALUES (:nome_oggetto, :descrizione, :id_category, CURRENT_TIME, :id_user)';
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([
+            'id_user' => $id_user,
+            'nome_oggetto' => $nome_oggetto,
+            'id_category' => $id_category,
+            'descrizione' => $descrizione,
+        ]);
+    }
 
 
 
