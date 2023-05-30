@@ -69,7 +69,7 @@
                 #1845ad,
                 #23a2f6
         );
-        left: -33vw;
+        left: -10vw;
         top: -80px;
     }
     .shape:last-child{
@@ -78,7 +78,7 @@
                 #ff512f,
                 #f09819
         );
-        right: -33vw;
+        right: -15vw;
         bottom: -80px;
     }
     .a-view{
@@ -90,6 +90,46 @@
         border-radius: 5px;
 
 
+    }
+
+    .container-add{
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        border: 2px solid rgba(255,255,255,0.1);
+        border-radius: 10px;
+        margin-top: 4vw;
+        padding: 2vw;
+        background-color: rgba(255,255,255,0.13);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 0 40px rgba(8,7,16,0.6);
+    }
+    .add-category{
+        display: flex;
+        flex-direction: row;
+    }
+    .add-category-select{
+        border-radius: 5px;
+        background: white;
+        margin-left: 2vw;
+        text-align: center;
+
+    }
+    .add-section{
+        border: solid;
+        border-radius: 10px;
+        border-width: 1px;
+        justify-content: center;
+        text-align: center;
+        margin: 1vw;
+    }
+    .container-market{
+        padding: 3vw; background-color: rgba(255,255,255,0.13);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 0 40px rgba(8,7,16,0.6);border: 2px solid rgba(255,255,255,0.1);
+        border-radius: 10px;
+        margin-top: 4vw;
+        margin-bottom: 4vw;
     }
 
 </style>
@@ -127,34 +167,34 @@
     </section>
 </header>
 <form class="" method="POST" action="index.php">
-    <div>
-        <div>
-            <div>Nome oggetto</div>
-            <div><input type="text" id="nome" name="nome"></div>
+    <div class="container-add">
+        <div class="add-title" style="text-align: center; font-size: 2vw">
+            <div>AGGIUNGI UN OGGETTO AL MERCATO</div>
         </div>
-        <div>
-            <div>Categoria</div>
-            <select id="category" name="category">
+        <div class="add-section" >
+            <div><input type="text" id="nome" name="nome" placeholder="Nome oggetto" style="text-align: center"></div>
+        </div>
+        <div class="add-section" style="display: flex; flex-direction: row">
+            <select class="add-category-select" id="category" name="category" >
+                <option value="" selected disabled hidden>Categoria</option>
                 <?php foreach ($categories as $c): ?>
                 <option value="<?=$c['id']?>"><?=$c['descrizione']?></option>
                 <?php endforeach; ?>
             </select>
         </div>
-        <div>
-            <div>Descrizione</div>
-            <div><input type="text" id="descrizione" name="descrizione"></div>
+        <div class="add-section" >
+            <div><input type="text" id="descrizione" name="descrizione" placeholder="Descrizione oggetto" style="text-align: center"></div>
         </div>
-        <div>
-            <button type="submit" name="action" value="add">AGGIUNGI</button>
+        <div class="add-btn" style="display: flex; justify-content: center">
+            <button class="a-view" type="submit" name="action" value="add" style="color: black; padding: 5px">AGGIUNGI</button>
         </div>
     </div>
-</form>
 
 
-<div style="padding: 3vw"></div>
+
+<div class="container-market">
 <h1 class="h1" >Mercato attuale</h1>
 
-<form method="post" action="index.php">
     <div class="form-group">
         <label for="todo">
 
@@ -233,6 +273,6 @@
         <?php endforeach; ?>
     </tbody>
 </table>
-
+    </div>
 
 

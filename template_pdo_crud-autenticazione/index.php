@@ -18,12 +18,21 @@ if ($user == null){
 
 $id_user = $user['user_id'];
 $name = $user['name'];
+
+if (isset($_POST['nome'])){
+    $nome_oggetto=$_POST['nome'];
+    $id_category=$_POST['category'];
+    $descrizione=$_POST['descrizione'];
+
+    $aggiunta= TodoRepository::addOggetto($id_user, $nome_oggetto, $id_category, $descrizione);
+
+
+}
 $objects = TodoRepository::listAll();
 $userObjects = TodoRepository::listUserObjects($id_user);
 $tokens=TodoRepository::tokens($id_user);
 $categories=TodoRepository::listAllCategories();
-
-
+$objectsBought= TodoRepository::listUserObjectsBought($id_user);
 if (isset($_GET['action'])){
     if (($_GET['action']) == 'logout'){
         Authenticator::logout();
@@ -31,7 +40,7 @@ if (isset($_GET['action'])){
         exit(0);
     }
     if (($_GET['action']) == 'account'){
-        $objectsBought= TodoRepository::listUserObjectsBought($id_user);
+
         echo $template->render('account', ['name' => $name, 'objects' => $userObjects, 'token'=>$tokens, 'boughts'=>$objectsBought]);
 
         exit(0);
@@ -54,19 +63,20 @@ if (isset($_GET['action'])){
 
         exit(0);
     }
-    if (($_GET['action']) == 'add'){
-        $nome_oggetto=$_POST['nome'];
-        $id_category=$_POST['category'];
-        $descrizione=$_POST['descrizione'];
+    if (($_GET['action']) == 'delete'){
+        $id_object=$_GET['id_object'];
 
-        TodoRepository::addOggetto($id_user, $nome_oggetto, $id_category, $descrizione);
+        TodoRepository::deleteOggetto($id_object);
 
+        echo $template->render('account', ['name' => $name, 'objects' => $userObjects, 'token'=>$tokens, 'boughts'=>$objectsBought]);
 
         exit(0);
     }
 
+
+
 }
-//Gestisce l'aggiunta di un nuovo impegno
+/*
 if (isset($_POST['impegno'])){
     $impegno = $_POST['impegno'];
     $importanza = $_POST['importanza'];
@@ -78,10 +88,12 @@ if (isset($_POST['impegno'])){
     else if ($impegno != '') {
         TodoRepository::add($impegno, $importanza, $id_user);
     }
-}
+}*/
+
+
 
 $id = null;
-
+/*
 if (isset($_GET['action'])){
     $azione = $_GET['action'];
     $id = $_GET['id'];
@@ -100,7 +112,7 @@ if (isset($_GET['action'])){
             TodoRepository::delete($id);
         }
     }
-}
+}*/
 
 
 //$todos = TodoRepository::listAllByUser($user['user_id']);

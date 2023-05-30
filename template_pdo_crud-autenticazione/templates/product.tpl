@@ -97,6 +97,15 @@
         justify-content: center;
         flex-direction: column;
 
+
+    }
+    .container-row{
+        padding: 3vw; background-color: rgba(255,255,255,0.13);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 0 40px rgba(8,7,16,0.6);border: 2px solid rgba(255,255,255,0.1);
+        border-radius: 10px;
+        margin-top: 4vw;
+        margin-bottom: 4vw;
     }
     .p{
         margin-top: 3vw;
@@ -108,6 +117,8 @@
         border-radius: 10px;
         border-color: black;
         padding: 3vw;
+        border-width: 1px;
+
 
 
     }
@@ -115,6 +126,7 @@
         margin-left: 2vw;
         font-size: 2vw;
     }
+
 
 </style>
 
@@ -152,27 +164,29 @@
 </header>
 
 <div class="container">
+    <div class="container-row">
     <div class="p" style="border: none; justify-content: space-between; text-align: center;">
         <div class="t-p" style="text-align: center; padding-left: 10vw "><?=$object['nome']?></div>
         <?php if($id_user == $seller): ?>
         <div class="container-obj-btn " style="padding-right: 10vw">
-            <a href="" class="a-command" style="background: linear-gradient(
+            <a href="index.php?action=delete&id_object=<?=$object['id_object']?>" class="a-command" style="background: linear-gradient(
                 to right,
                 #ff512f,
                 #f09819
-        ); color: black">RIMUOVI</a>
+        ); color: black; border-radius: 30px">RIMUOVI</a>
         </div>
         <?php else:?>
         <div class="container-obj-btn " style="padding-right: 10vw">
             <a href="index.php?action=buy&id_object=<?=$object['id_object']?>&id_seller=<?=$seller?>" class="a-command" style="background: linear-gradient(
                 #1845ad,
                 #23a2f6
-        ); color: black">ACQUISTA</a>
+        ); color: black; border-radius: 30px">ACQUISTA</a>
         </div>
         <?php endif;?>
 
 
     </div>
+
     <div class="p">
         <div class="t-p"> CATEGORIA</div>
         <div class="p2"><?=$object['categoria']?></div>
@@ -190,6 +204,7 @@
 
     </div>
     <?php endif;?>
+    </div>
 
 </div>
 <div style="margin-bottom: 5vw"></div>

@@ -100,17 +100,7 @@ class TodoRepository{
     }
 
 
-    public static function owned(string $id_todo, int $id_user): bool{
-        $pdo = Connection::getInstance();
-        $sql = 'SELECT id FROM todo WHERE id = :id AND id_user = :id_user';
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute([
-                'id' => $id_todo,
-                'id_user' => $id_user
-            ]
-        );
-        return ($stmt->rowCount() == 1);
-    }
+
 
     public static function buyOggetto(int $id_oggetto, int $id_compratore, int $id_venditore): bool{
         $pdo = Connection::getInstance();
@@ -153,17 +143,27 @@ class TodoRepository{
     {
         $pdo = Connection::getInstance();
         $sql = 'INSERT INTO oggetto(nome, descrizione, id_categoria, data_offerta, id_offerente)
-            VALUES (:nome_oggetto, :descrizione, :id_category, CURRENT_TIME, :id_user)';
+        VALUES (:nome_oggetto, :descrizione, :id_category, :date, :id_user)';
         $stmt = $pdo->prepare($sql);
         $stmt->execute([
             'id_user' => $id_user,
             'nome_oggetto' => $nome_oggetto,
             'id_category' => $id_category,
             'descrizione' => $descrizione,
+            'date' => date('Y-m-d H:i:s'),
         ]);
+        return $stmt->fetch();
     }
 
-
+    public static function deleteOggetto(int $id_object)
+    {
+        $pdo = Connection::getInstance();
+        $sql = 'DELETE FROM oggetto WHERE id = :id';
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([
+            'id' => $id_object,
+        ]);
+    }
 
 
 }

@@ -59,8 +59,8 @@
                 #1845ad,
                 #23a2f6
         );
-        left: -33vw;
-        top: 20vw;
+        left: -15vw;
+        top: 30vw;
     }
     .shape:last-child{
         background: linear-gradient(
@@ -68,8 +68,16 @@
                 #ff512f,
                 #f09819
         );
-        right: -33vw;
-        bottom: 20vw;
+        right: -10vw;
+        bottom: 10vw;
+    }
+    .c-table{
+        padding: 3vw; background-color: rgba(255,255,255,0.13);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 0 40px rgba(8,7,16,0.6);border: 2px solid rgba(255,255,255,0.1);
+        border-radius: 10px;
+        margin-top: 4vw;
+        margin-bottom: 4vw;
     }
 </style>
 <div class="background" >
@@ -153,7 +161,9 @@
     <?php endforeach; ?>
     </tbody>
 </table>
+
     <?php endif;?>
+</div>
     <div class="c-table" style="margin-top: 3vw">
         <p style="font-size: 2vw">OGGETTI COMPRATI</p>
         <?php if($boughts == null): ?>
