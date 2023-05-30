@@ -17,7 +17,11 @@ if ($user == null){
 }
 
 $id_user = $user['user_id'];
-$displayed_name = $user['displayed_name'];
+$name = $user['name'];
+$objects = TodoRepository::listAll();
+$userObjects = TodoRepository::listUserObjects($id_user);
+$tokens=TodoRepository::tokens($id_user);
+
 
 if (isset($_GET['action'])){
     if (($_GET['action']) == 'logout'){
@@ -25,6 +29,31 @@ if (isset($_GET['action'])){
         echo $template->render('login');
         exit(0);
     }
+    if (($_GET['action']) == 'account'){
+        $objectsBought= TodoRepository::listUserObjectsBought($id_user);
+        echo $template->render('account', ['name' => $name, 'objects' => $userObjects, 'token'=>$tokens, 'boughts'=>$objectsBought]);
+
+        exit(0);
+    }
+    if (($_GET['action']) == 'product'){
+        $id = $_GET['id_object'];
+        $product_id_seller=$_GET['id_seller'];
+        $object= TodoRepository::viewProduct($id);
+
+        echo $template->render('product', ['name' => $name, 'object' => $object, 'seller' =>$product_id_seller, 'id_user' => $id_user]);
+
+        exit(0);
+    }
+    if (($_GET['action']) == 'buy'){
+        $id_object=$_GET['id_object'];
+        $id_seller=$_GET['id_seller'];
+
+        TodoRepository::buyOggetto($id_object, $id_user, $id_seller);
+        echo $template->render('transaction', ['name'=>$name]);
+
+        exit(0);
+    }
+
 }
 //Gestisce l'aggiunta di un nuovo impegno
 if (isset($_POST['impegno'])){
@@ -40,8 +69,6 @@ if (isset($_POST['impegno'])){
     }
 }
 
-$testo = "";
-$importanza = -1;
 $id = null;
 
 if (isset($_GET['action'])){
@@ -64,12 +91,14 @@ if (isset($_GET['action'])){
     }
 }
 
+
 //$todos = TodoRepository::listAllByUser($user['user_id']);
+
+
 
 echo $template->render('crud', [
     //'todos' => $todos,
-    'testo' => $testo,
-    'importanza' => $importanza,
+    'objects' => $objects,
     'id' => $id,
-    'displayed_name' => $displayed_name
+    'name' => $name,
 ]);

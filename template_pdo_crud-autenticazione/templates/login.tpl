@@ -1,7 +1,5 @@
 <?php $this->layout('home', ['titolo' => 'Esempio CRUD - login']) ?>
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+
 <style media="screen">
     .container-login{
         display: flex;
@@ -14,15 +12,8 @@
 
     }
 
-                         *,
-                         *:before,
-                         *:after{
-                             padding: 0;
-                             margin: 0;
-                             box-sizing: border-box;
-                         }
     body{
-        background-color: #080710;
+        background-color: white;
     }
     .background{
         width: 430px;
@@ -71,7 +62,7 @@
     }
     form *{
         font-family: 'Poppins',sans-serif;
-        color: #ffffff;
+        color: #080710;
         letter-spacing: 0.5px;
         outline: none;
         border: none;
@@ -94,14 +85,17 @@
         height: 50px;
         width: 100%;
         background-color: rgba(255,255,255,0.07);
-        border-radius: 3px;
+        border-radius: 10px;
+        border-style:solid;
+        border-width: 1px;
+
         padding: 0 10px;
         margin-top: 8px;
         font-size: 14px;
         font-weight: 300;
     }
     ::placeholder{
-        color: #e5e5e5;
+        color: black;
     }
     button{
         margin-top: 50px;
@@ -111,31 +105,13 @@
         padding: 15px 0;
         font-size: 18px;
         font-weight: 600;
-        border-radius: 5px;
+        border-radius: 10px;
+        border-color: black;
+        border-width: 2px;
+        border-style: solid;
         cursor: pointer;
     }
-    .social{
-        margin-top: 30px;
-        display: flex;
-    }
-    .social div{
-        background: red;
-        width: 150px;
-        border-radius: 3px;
-        padding: 5px 10px 10px 5px;
-        background-color: rgba(255,255,255,0.27);
-        color: #eaf0fb;
-        text-align: center;
-    }
-    .social div:hover{
-        background-color: rgba(255,255,255,0.47);
-    }
-    .social .fb{
-        margin-left: 25px;
-    }
-    .social i{
-        margin-right: 4px;
-    }
+
 
 </style>
 
@@ -152,10 +128,10 @@
     <?php endif; ?>
 
     <label for="username">Username</label>
-    <input type="text" placeholder="Username" id="username" name="username">
+    <input type="text" placeholder="JohnWick" id="username" name="username">
 
     <label for="password">Password</label>
-    <input type="password" placeholder="Password" id="password" name="password">
+    <input type="password" placeholder="••••••••" id="password" name="password">
 
     <button>Log In</button>
 </form>
